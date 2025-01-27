@@ -7,9 +7,9 @@
 
 {% block content %}
     <section id="summary">
-        <h2>Post title</h2>
+        <h2>{{ search_post.title }}</h2>
         <article>
-            <img src="{static 'blog/images/mountains.jpg'}" alt="Post Title"/>
+            <img src="{% static "blog/images/"|add:search_post.image %}" alt="{{ search_post.title }}"/>
             <addresse>By niko</addresse>
             <div>
                 Last update <time>26-01</time>

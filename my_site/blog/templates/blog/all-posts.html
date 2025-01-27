@@ -11,10 +11,10 @@
         <h1><a href="{% url "starting-page" %}">POST</a></h1>
         <h2>la mia collezione di post</h2>
         <ul>
-            {% include "blog/includes/post.html"%}
-            {% include "blog/includes/post.html"%}
-            {% include "blog/includes/post.html"%}
-            {% include "blog/includes/post.html"%}
+            {% for p in list_posts %}
+                {% include "blog/includes/post.html"%}
+            {% endfor %}
+            
         </ul>
     </section>
 {% endblock %}

@@ -72,13 +72,18 @@ all_posts = [
 
 def starting_page(request):
     list_posts = [p for p in all_posts]
-    print(list_posts)
+    
     return render(request, "blog/index.html", {
         "list_posts": list_posts
     })
 
 def posts(request):
-    return render(request, "blog/all-posts.html")
+    return render(request, "blog/all-posts.html", {
+       "list_posts": all_posts 
+    })
 
 def post_detail(request, slug):
-    return render(request, "blog/post-detail.html")
+    search_post = next(p for p in all_posts if p['slug'] == slug)
+    return render(request, "blog/post-detail.html", {
+        "search_post": search_post
+    })
