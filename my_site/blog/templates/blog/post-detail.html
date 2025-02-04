@@ -8,9 +8,14 @@
 {% block content %}
     <section id="summary">
         <h2>{{ search_post.title }}</h2>
+        <div>
+            {% for tag in posts_tags %}
+                <span>{{ tag.caption }} - </span>
+            {% endfor %}
+        </div>
         <article>
-            <img src="{% static "blog/images/"|add:search_post.image %}" alt="{{ search_post.title }}"/>
-            <addresse>By niko</addresse>
+            <img src="{% static "blog/images/"|add:search_post.image_name %}" alt="{{ search_post.title }}"/>
+            <addresse>By <a href="mailto:{{ search_post.author.email_address }}">{{ search_post.author }}</a></addresse>
             <div>
                 Last update <time>26-01</time>
             </div>
