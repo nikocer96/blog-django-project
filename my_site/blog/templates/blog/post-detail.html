@@ -14,7 +14,7 @@
             {% endfor %}
         </div>
         <article>
-            <img src="{% static "blog/images/"|add:search_post.image_name %}" alt="{{ search_post.title }}"/>
+            <img src="{{ search_post.image.url }}" alt="{{ search_post.title }}"/>
             <addresse>By <a href="mailto:{{ search_post.author.email_address }}">{{ search_post.author }}</a></addresse>
             <div>
                 Last update <time>26-01</time>
