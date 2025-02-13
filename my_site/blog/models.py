@@ -30,6 +30,9 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name="posts")
     tags = models.ManyToManyField(Tag)
     
+    def __str__(self):
+        return f"{self.title}"
+    
     
 class Comment(models.Model):
     user_name = models.CharField(max_length=120)
@@ -37,3 +40,4 @@ class Comment(models.Model):
     text = models.TextField(max_length=300)
     # UN COMMENTO HA UN POST, MA UN POST HA PIU' COMMENTI
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    

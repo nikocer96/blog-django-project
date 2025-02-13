@@ -13,9 +13,19 @@
                 <span>{{ tag.caption }} - </span>
             {% endfor %}
         </div>
+
+        <div id="read-later ">
+            <form action="{% url "read-later" %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ post.id }}" name="post_id">
+                <button>Read later</button>
+            </form>
+        </div>
+
         <article>
             <img src="{{ post.image.url }}" alt="{{ post.title }}"/>
             <addresse>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></addresse>
+            <div>Last updated on <time>{{ post.date }}</time></div>
             <div>
                 Last update <time>26-01</time>
             </div>
@@ -25,11 +35,22 @@
         {{ post.content}}
     </main>
 
+    <section id ="comments">
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <h2>Id: {{ comment.id }}, {{ comment.user_name }}</h2>
+                    <p>{{ comment.text }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
     <section id = "comment-form">
         <form action = "{% url "post-detail-page" post.slug %}" method = "POST">
             {% csrf_token %}
             {% for form_field in comment_form %}
-                <div class="form-control">
+                <div class="form-control {% if form_field.errors %}invalid{% endif %}">
                     {{ form_field.label_tag }}
                     {{ form_field }}
                     {{ form_field.errors }}
