@@ -14,14 +14,28 @@
             {% endfor %}
         </div>
         <article>
-            <img src="{{ search_post.image.url }}" alt="{{ search_post.title }}"/>
-            <addresse>By <a href="mailto:{{ search_post.author.email_address }}">{{ search_post.author }}</a></addresse>
+            <img src="{{ post.image.url }}" alt="{{ post.title }}"/>
+            <addresse>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></addresse>
             <div>
                 Last update <time>26-01</time>
             </div>
         </article>
     </section>
     <main>
-        {{ search_post.content}}
+        {{ post.content}}
     </main>
+
+    <section id = "comment-form">
+        <form action = "{% url "post-detail-page" post.slug %}" method = "POST">
+            {% csrf_token %}
+            {% for form_field in comment_form %}
+                <div class="form-control">
+                    {{ form_field.label_tag }}
+                    {{ form_field }}
+                    {{ form_field.errors }}
+                </div>
+            {% endfor %}
+            <button>Save comment</button>
+        </form>
+    </section>
 {% endblock %}
